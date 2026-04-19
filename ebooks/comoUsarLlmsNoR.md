@@ -31,8 +31,7 @@ O uso básico do pacote é feito através da função gemini(). Para utilizá-la
 gemini([seu prompt aqui])
 ```
 
-### Gerando texto a partir de um prompt
-
+### Gerando texto a partir de um prompt sem pacote específico
 
 #### **Instalação de pacotes**
 ```r
@@ -147,9 +146,141 @@ cat(gemini(prompt))
 
 5. **O que o código faz:** Ele traduz seu prompt em português/inglês para uma requisição HTTP que o Google Gemini entende e depois traduz a resposta JSON de volta para texto no R.
 
+### Gerando texto a partir de um prompt com o pacote gemini.R
 
+O código acima é ótimo para aprendermos como funcionam as chamadas para a API de uma LLM, mas para uso profissional é muito pouco produtivo.
+Precisamos atualizar todo o código a cada vez que a API do Google Gemini for atualizada. Felizmente, já existem pacotes que fazem isso por nós.
 
+#### **1. Instalação do pacote gemini.R**
 
+```r
+# Método 1: Instalar do CRAN
+install.packages("gemini.R")
+
+# Método 2: Instalar diretamente do GitHub
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("jhk0530/gemini.R")
+
+# Carregar o pacote
+library(gemini.R)
+```
+
+### **2. Configuração da chave API**
+
+```r
+# Método 1: Configurar antes de usar (recomendado)
+set_api_key("SUA_CHAVE_AQUI")
+
+# Método 2: Usar variável de ambiente (mais seguro)
+# Coloque no seu .Renviron:
+# GEMINI_API_KEY="suachaveaqui"
+
+# Método 3: Passar diretamente na função (menos seguro)
+gemini("Seu prompt", api_key = "SUA_CHAVE")
+```
+
+### **3. Uso básico - Muito mais simples!**
+
+```r
+# Com o pacote gemini.R - apenas 1 linha!
+resposta <- gemini("R code to download data from IBGE.")
+
+# Exibir resultado
+cat(resposta)
+```
+
+### **4. Comparação lado a lado**
+
+Abaixo segue a comparação entre os dois códigos. O primeiro é o código original que escrevi e o segundo é o código que escrevi usando o pacote gemini.R.
+
+```r
+# ===== CÓDIGO ORIGINAL (complexo) =====
+gemini_manual <- function(prompt, temperature = 1, ...) {
+  # 30+ linhas de código com httr, JSON, etc.
+  # Manipulação manual de requisições HTTP
+  # Tratamento manual de erros
+}
+
+# ===== COM gemini.R (simples) =====
+library(gemini.R)
+resposta <- gemini("Seu prompt aqui")
+```
+
+### **5. Funcionalidades avançadas do gemini.R**
+
+O pacote gemini.R oferece diversas funcionalidades que facilitam o uso da API do Google Gemini, como a escolha do modelo que queremos utilizar, controle de parâmetros, processamento em lote e chat com histórico. Abaixo estão algumas das funcionalidades mais comuns:
+
+```r
+# Diferentes modelos
+gemini("Prompt", model = "gemini-1.5-pro")  # Mais poderoso
+gemini("Prompt", model = "gemini-1.5-flash") # Mais rápido
+gemini("Prompt", model = "gemini-1.0-pro")   # Versão anterior
+
+# Controle de parâmetros
+gemini(
+  "Explique conceitos de R",
+  temperature = 0.7,        # Menos criativo, mais focado
+  max_tokens = 500,         # Resposta mais curta
+  top_p = 0.9,             # Diversidade do vocabulário
+  top_k = 40               # Limite de palavras consideradas
+)
+
+# Múltiplos prompts (batch processing)
+prompts <- c(
+  "O que é um vetor em R?",
+  "Como criar uma matriz?",
+  "Explique listas em R"
+)
+
+respostas <- sapply(prompts, gemini)
+
+# Chat com histórico
+chat <- gemini_chat()
+chat$add_user("O que é tidyverse?")
+resposta1 <- chat$send()
+chat$add_user("E quais pacotes principais?")
+resposta2 <- chat$send()
+```
+
+### **6. Vantagens do pacote gemini.R sobre seu código manual**
+
+| Característica | Seu código manual | Pacote gemini.R |
+|----------------|-------------------|-----------------|
+| **Linhas de código** | ~40 linhas | 1 linha |
+| **Tratamento de erros** | Básico | Robusto e informativo |
+| **Rate limiting** | Não implementado | Sim (evita bloqueios) |
+| **Streaming de resposta** | Não | Sim (`stream_callback`) |
+| **Suporte a múltiplos modelos** | Limitado | Completo |
+| **Histórico de conversa** | Não | Sim (`gemini_chat()`) |
+| **Manutenção** | Você precisa atualizar | Mantido pela comunidade |
+| **Documentação** | Ausente | Completa (`?gemini`) |
+
+### **7. Exemplo prático de migração**
+
+```r
+# CÓDIGO ORIGINAL
+prompt <- "R code to remove duplicates using dplyr."
+cat(gemini(prompt))  # Sua função manual
+
+# COM gemini.R (substituição direta)
+library(gemini.R)
+set_api_key("sua_chave")  # Uma vez por sessão
+prompt <- "R code to remove duplicates using dplyr."
+cat(gemini(prompt))  # Mesma sintaxe! Só muda o pacote
+```
+
+### **8. Por que o pacote gemini.R é melhor?**
+
+```r
+# 1. Código mais limpo
+# 2. Menos pontos de falha
+# 3. Funcionalidades semânticas e transparentes
+gemini("Prompt", verbose = TRUE)  # Mostra o que está acontecendo
+# 4. Integração com o tidyverse
+library(tidyverse)
+tibble(pergunta = c("Escreva o código para realizar a descritiva de um dataframe", "Escreva o código para fazer o diagrama de dispersão de um dataframe")) %>%
+  mutate(resposta = map_chr(pergunta, gemini))
+```
 
 ## Glosário das LLMs
 
