@@ -1,8 +1,7 @@
 # R para Vigilância em Saúde com IA Generativa  
 
-![Status](https://img.shields.io/badge/Status-Concluído-success)
 ![Linguagem](https://img.shields.io/badge/Linguagem-R-blue)
-![Público](https://img.shields.io/badge/Público-Vigilância_Sanitária-orange)
+![Público](https://img.shields.io/badge/Público-Vigilância_em_Saúde-orange)
 
 Bem-vindo ao repositório oficial do guia **R para Vigilância em Saúde e IA Generativa**. Este material foi desenvolvido com foco nas melhores práticas em R e tem como público-alvo estudantes e profissionais de vigilância em saúde. 
 
