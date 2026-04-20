@@ -22,6 +22,7 @@ R-Vigilancia-Saude-IA/
 ├── dados/                         # Diretório para armazenar os arquivos de dados (CSV, etc.)
 ├── shapefiles/                    # Diretório para armazenar os arquivos geoespaciais (.shp)
 └── scripts/                       # Diretório contendo os códigos R separados por módulo
+└── exercicios/                    # Diretório contendo listas de exercícios R para prática, revisão e fixação do conteúdo
 ```
 
 ---
