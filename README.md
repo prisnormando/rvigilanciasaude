@@ -100,9 +100,14 @@ Para enriquecer suas análises e praticar com dados reais, recomendamos as segui
 
 ---
 
-## 🤝 Contribuições
+## 🤝 Materiais de Apoio
 
-Este repositório é um espaço aberto para o aprendizado contínuo em vigilância em saúde. Se você encontrar algum erro nos scripts, tiver sugestões de melhoria ou quiser adicionar novas análises, sinta-se à vontade para abrir uma *Issue* ou enviar um *Pull Request*.
+- **Agente Instrutor de Linguagem R para Vigilância em Saúde:**[R Language for Health Surveillance Instructor](https://gemini.google.com/gem/1m4xUozFZUaBNlRl20rgmq7HbXLKVZXmZ?usp=sharing)
+
+- **Vídeos do curso básico de R:** [R BMClima](https://youtube.com/playlist?list=PLczEXt1zhB1Rn7BVa6SaV-KtCDL-Cecyc&si=TaLBtE08dKR9j1qo)
+
+- **Kaggle R Collection:** [Kaggle R Collection](https://www.kaggle.com/learn-guide/r)
+
 
 ---
 
@@ -111,3 +116,6 @@ Este repositório é um espaço aberto para o aprendizado contínuo em vigilânc
 [1] R Core Team. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. 2023. Disponível em: https://www.R-project.org/
 [2] Xavier, A. C. Brazilian Daily Weather Gridded Data (BR-DWGD). 
 [3] IPEA. Índice de Vulnerabilidade Social.
+[4] [EpiRHandBook](https://epirhandbook.com/pt/index.pt.html)
+
+
